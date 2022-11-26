@@ -9,7 +9,6 @@
     <title>User Profile | eShop</title>
 
     <link rel="stylesheet" href="./resource/css/bootstrap.css" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
     <link rel="stylesheet" href="./resource/css/profile.css" />
 
     <link rel="icon" href="resource/logo.svg" />
