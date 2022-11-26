@@ -1,0 +1,41 @@
+html,body{
+    padding:0;
+    margin: 0;
+}
+
+*{
+    /* border: 1px solid black; */
+}
+
+.logo{
+    max-height: 50px;
+}
+
+.poster-title{
+    font-size: 50px;
+    color: black;
+    font-weight: bold;
+}
+
+.poster-text{
+    font-size: 20px;
+    color: gray;
+}
+
+.poster-caption{
+    margin-bottom: 140px;
+}
+
+.poster-caption2{
+    margin-bottom: 65px;
+    margin-right: 195px;
+}
+
+
+.carousel-inner img{
+    height: 500px;
+}
+
+.btn-link, .see_all{
+    cursor: pointer;
+}

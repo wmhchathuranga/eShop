@@ -43,6 +43,9 @@ function signUp() {
                 if(document.getElementById("success1").classList.contains("d-none")){
                     document.getElementById("success1").classList.toggle("d-none");
                 }
+                setTimeout(() => {
+                    toggle_sign();
+                }, 2000);
             }
         }
     }
@@ -83,6 +86,9 @@ function signIn() {
                 if(document.getElementById("success2").classList.contains("d-none")){
                     document.getElementById("success2").classList.toggle("d-none");
                 }
+                setTimeout(() => {
+                    window.location = "home.php";
+                }, 2000);
             }
         }
     }
@@ -90,4 +96,20 @@ function signIn() {
     request.open("POST", "signinProcess.php", true);
     request.send(form);
 
+}
+
+function forgotPassword(){
+    var email = document.getElementById("reset-email");
+
+    var form = new FormData();
+    form.append("email",email.value);
+    var request = new XMLHttpRequest();
+    request.onreadystatechange = () =>{
+        if(request.readyState == 4){
+            alert(request.responseText);
+        }
+    }
+
+    request.open("POST", "forgotpassword.php",true);
+    request.send(form);
 }

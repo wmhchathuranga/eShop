@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 include_once("./connection.php");
 
 $email = $_POST["email"];
@@ -20,7 +20,17 @@ if (empty($email)) {
     $query1 = "SELECT * FROM `users` WHERE `email` = '$email' AND `password` = '$password'";
     $response = Database::select($query1);
     $rows = $response->num_rows;
-    if($rows > 0){
+    if($rows == 1){
+        $user = $response->fetch_assoc();
+        $_SESSION["user"] = $user;
+        if($remember == "true"){
+            setcookie("email",$email,time()+(60*60*24*30));
+            setcookie("password",$password,time()+(60*60*24*30));
+        }
+        else{
+            setcookie("email","",-1);
+            setcookie("password","",-1);
+        }
         echo "Success";
     }
     else{

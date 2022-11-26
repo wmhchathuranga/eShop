@@ -1,5 +1,9 @@
 <?php
 require_once("./connection.php");
+session_start();
+if(isset($_SESSION["user"])){
+    header("Location: home.php");
+}
 ?>
 
 <!DOCTYPE html>
@@ -10,9 +14,9 @@ require_once("./connection.php");
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Signup | Eshop</title>
-    <link rel="shortcut icon" href="./resources/img/logo.svg" type="image/x-icon">
-    <link rel="stylesheet" href="./resources/css/bootstrap.css">
-    <link rel="stylesheet" href="./resources/css/login.css">
+    <link rel="shortcut icon" href="./resource/img/logo.svg" type="image/x-icon">
+    <link rel="stylesheet" href="./resource/css/bootstrap.css">
+    <link rel="stylesheet" href="./resource/css/login.css">
 </head>
 
 <body>
@@ -20,14 +24,14 @@ require_once("./connection.php");
         <div class="row welcome justify-content-center h-25">
             <div class="col-md-4 h-100">
                 <div class="row h-100 p-3">
-                    <img src="./resources/img/logo.svg" alt="" class="img-fluid h-75">
+                    <img src="./resource/img/logo.svg" alt="" class="img-fluid h-75">
                     <p class="text-center fs-2 m-0 welcome-text">Hi, Welcome to eShop</p>
                 </div>
             </div>
         </div>
         <div class="row form px-2">
             <div class="col-md-6 d-none d-md-flex align-items-center justify-content-center">
-                <img src="./resources/img/background.svg" alt="" class="img-fluid h-75">
+                <img src="./resource/img/background.svg" alt="" class="img-fluid h-75">
             </div>
 
             <!-- Sign up div -->
@@ -47,13 +51,13 @@ require_once("./connection.php");
                                     <path d="M7.002 12a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 5.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995z" />
                                 </svg>
                                 <span id="err-msg1">
-                                    
+
                                 </span>
-                            
+
                             </div>
                             <div class="alert alert-success d-none" role="alert" id="success1">
                                 Registration Successfull!
-                                
+
                             </div>
                         </div>
                         <div class="row mt-2">
@@ -126,13 +130,13 @@ require_once("./connection.php");
                                     <path d="M7.002 12a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 5.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995z" />
                                 </svg>
                                 <span id="err-msg2">
-                                    
+
                                 </span>
-                            
+
                             </div>
                             <div class="alert alert-success d-none" role="alert" id="success2">
                                 Login Success!
-                                
+
                             </div>
                         </div>
                         <div class="row d-md-none">
@@ -141,13 +145,19 @@ require_once("./connection.php");
                         <div class="row mt-3">
                             <div class="form-group">
                                 <label for="email" class="d-block">Email</label>
-                                <input type="email" class="form-control" id="email">
+                                <input type="email" class="form-control" id="email" value="<?php
+                                                                                            if (isset($_COOKIE["email"]))
+                                                                                                echo $_COOKIE["email"]
+                                                                                            ?>">
                             </div>
                         </div>
                         <div class="row mt-2">
                             <div class="form-group">
                                 <label for="password" class="d-block">Password</label>
-                                <input type="password" class="form-control" id="password">
+                                <input type="password" class="form-control" id="password" value="<?php
+                                                                                                    if (isset($_COOKIE["password"]))
+                                                                                                        echo $_COOKIE["password"];
+                                                                                                    ?>">
                             </div>
                         </div>
 
@@ -161,7 +171,7 @@ require_once("./connection.php");
                             <div class="form-group col-6">
                                 <div class="row pe-1">
                                     <span class="text-end">
-                                        <a href="#">Forgot Password</a>
+                                        <button href="#" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#exampleModal">Forgot Password</button>
                                     </span>
                                 </div>
                             </div>
@@ -180,6 +190,30 @@ require_once("./connection.php");
             </div>
 
         </div>
+
+        <!-- Forgot password modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Password Reset</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="email">Enter your Email Address</label>
+                            <input type="email" class="form-control mt-1" placeholder="user@email.com" id="reset-email">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" onclick="forgotPassword()">Reset Password</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End of modal -->
+
+        
         <div class="row footer">
             <div class="col">
                 <p class="text-center copyright small mb-0 mt-3">&copy; 2022 eshop.lk || All Right Reserved</p>
@@ -187,8 +221,8 @@ require_once("./connection.php");
         </div>
     </div>
 
-    <script src="./resources/js/bootstrap.bundle.js"></script>
-    <script src="./resources/js/login.js"></script>
+    <script src="./resource/js/bootstrap.bundle.js"></script>
+    <script src="./resource/js/login.js"></script>
 </body>
 
 </html>
