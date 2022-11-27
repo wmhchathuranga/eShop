@@ -37,7 +37,7 @@ else{
         $mail->Host = 'smtp.gmail.com';
         $mail->SMTPAuth = true;
         $mail->Username = 'harshana.all@gmail.com';
-        $mail->Password = 'pyoncsvosvmjchfy';
+        $mail->Password = '';
         $mail->SMTPSecure = 'ssl';
         $mail->Port = 465;
         $mail->setFrom('harshana.all@gmail.com', 'Eshop Account Team');
