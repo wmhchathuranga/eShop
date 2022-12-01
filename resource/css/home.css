@@ -39,3 +39,8 @@ html,body{
 .btn-link, .see_all{
     cursor: pointer;
 }
+
+.product_title{
+    text-decoration: none;
+    cursor: pointer;
+}

@@ -53,6 +53,8 @@
 
                                         <?php
 
+                                        $image_rs = Database::select("SELECT * FROM `profile_image` WHERE `user_email`='" . $email . "'");
+
                                         if (empty($image_data["path"])) {
 
                                         ?>

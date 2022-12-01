@@ -1,0 +1,8 @@
+.emptycart{
+    height: 400px;
+    /* background-color: red; */
+    background-image: url(resource/emptycart.png);
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+}

@@ -31,3 +31,83 @@ function basic_search() {
     request.open("POST", "basicSearch.php", true);
     request.send(form);
 }
+
+
+function addToWatchlist(id) {
+    var r = new XMLHttpRequest();
+
+    r.onreadystatechange = function () {
+        if (r.readyState == 4) {
+            var t = r.responseText;
+            if (t == "removed") {
+                document.getElementById("heart" + id).style.className = "text-dark";
+                window.location.reload();
+            } else if (t == "added") {
+                document.getElementById("heart" + id).style.className = "text-danger";
+                window.location.reload();
+            } else {
+                alert(t);
+            }
+        }
+    }
+
+    r.open("GET", "addToWatchlistProcess.php?id=" + id, true);
+    r.send();
+}
+
+function removeFromWatchlist(id) {
+
+    var r = new XMLHttpRequest();
+
+    r.onreadystatechange = function () {
+        if (r.readyState == 4) {
+            var t = r.responseText;
+            if (t == "success") {
+                window.location.reload();
+            } else {
+                alert(t);
+            }
+        }
+    }
+
+    r.open("GET", "removeWatchlistProcess.php?id=" + id, true);
+    r.send();
+
+}
+
+function addToCart(id) {
+
+    var r = new XMLHttpRequest();
+
+    r.onreadystatechange = function () {
+        if (r.readyState == 4) {
+            var t = r.responseText;
+            alert(t);
+        }
+    }
+
+    r.open("GET", "addToCartProcess.php?id=" + id, true);
+    r.send();
+
+}
+
+function deleteFromCart(id) {
+
+    var r = new XMLHttpRequest();
+
+    r.onreadystatechange = function () {
+        if (r.readyState == 4) {
+            var t = r.responseText;
+            if (t == "success") {
+                alert("Product removed from cart");
+                window.location.reload();
+            } else {
+                alert(t);
+            }
+        }
+    }
+
+    r.open("GET", "deleteFromCartProcess.php?id=" + id, true);
+    r.send();
+
+}

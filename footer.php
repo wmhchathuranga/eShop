@@ -1,5 +1,5 @@
         <!-- Footer -->
-        <div class="row bg-dark text-light py-4 mt-5">
+        <div class="row bg-dark text-light py-4 mt-3">
             <div class="col-md mb-2">
                 <div class="row">
                     <h1 class="fs-4 text-uppercase text-warning">ESHOP</h1>

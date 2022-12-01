@@ -19,25 +19,29 @@
         if (!isset($_SESSION["user"])) {
             header("Location: welcome.php");
         }
+        $page_number = 1;
+        if (isset($_GET["page"])) {
+            $page_number = $_GET["page"];
+        }
         ?>
         <!-- Cstom Header -->
         <div class="row header bg-primary py-3">
             <div class="col-md-2 mb-2 mb-md-0">
                 <img src="
-                <?php 
+                <?php
 
-                $query = "SELECT * FROM `profile_image` WHERE `user_email` = '".$_SESSION["user"]["email"]."'";
+                $query = "SELECT * FROM `profile_image` WHERE `user_email` = '" . $_SESSION["user"]["email"] . "'";
                 $response = Database::select($query);
                 $rows = $response->num_rows;
-                if($row = 1){
+
+                if ($rows = 1) {
                     $row = $response->fetch_assoc();
                     echo $row["path"];
-                }
-                else{
+                } else {
                     echo "resource/profile_img/new_user.svg";
                 }
 
-?>
+                ?>
                 " alt="" class="img-fluid d-block mx-auto rounded-circle" style="width: 140px; height:150px">
             </div>
             <div class="col-md-2 align-self-center">
@@ -72,8 +76,8 @@
 
                         <p class="fw-bold mb-0">Filters</p>
                         <div class="input-group mb-3">
-                            <input type="text" class="form-control" placeholder="Search...">
-                            <button class="btn">
+                            <input type="text" class="form-control" placeholder="Search..." id="search_text">
+                            <button class="btn" onclick="basic_search()">
                                 <span>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
                                         <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
@@ -98,11 +102,11 @@
                         <hr class="mt-0">
                         <div class="input-group">
                             <input type="radio" name="quantity" id="quantity1">
-                            <label for="quantity1" class="ms-1">Newest to Oldest</label>
+                            <label for="quantity1" class="ms-1">High to Low</label>
                         </div>
                         <div class="input-group mb-3">
                             <input type="radio" name="quantity" id="quantity2">
-                            <label for="quantity2" class="ms-1">Oldest to Newer</label>
+                            <label for="quantity2" class="ms-1">Low to High</label>
                         </div>
 
                         <!-- Filter by Condition -->
@@ -119,7 +123,7 @@
 
                         <div class="row justify-content-center mb-3">
                             <div class="col-md-4 px-3 px-md-1 text-center me-md-1 mb-2 mb-md-0">
-                                <button class="btn btn-success btn-sm w-100">Search</button>
+                                <button class="btn btn-success btn-sm w-100" onclick="sort()">Search</button>
                             </div>
                             <div class="col-md-7 px-3 px-md-1 text-center">
                                 <button class="btn btn-primary btn-sm w-100">Clear Filters</button>
@@ -128,48 +132,112 @@
                     </div>
                 </div>
             </div>
-            <?php
-
-            $query = "";
-
-
-?>
             <!-- Items -->
             <div class="col-md-10">
                 <div class="row">
                     <div class="col bg-light">
-                        <div class="row mb-2 p-2 justify-content-around">
-                            <!-- Card -->
-                            <div class="col-md-5 mx-0 mb-2 mt-2 py-1">
-                                <div class="row px-2 ">
-                                    <div class="col-4 p-0 me-2">
-                                        <img src="./resource/img/mobile_images/htc_u.jpg" alt="" class="img-thumbnail" style="height: 150px;">
-                                    </div>
-                                    <div class="col text-center me-2 mt-1">
-                                        <span>HTC</span><br>
-                                        <span>Rs. 100000.00</span><br>
-                                        <span>10 Items Left</span><br>
-                                        <div class="col-10 align-self-center">
-                                            <div class="form-check form-switch justify-content-center">
-                                                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked>
-                                                <label class="form-check-label w-50 text-center" for="flexSwitchCheckChecked">Active</label>
-                                            </div>
-                                        </div>
-                                        <div class="row p-0">
-                                            <div class="col p-0 me-1"><button class="btn btn-success w-100">Update</button></div>
-                                            <div class="col p-0"><button class="btn btn-danger w-100">Delete</button></div>
-                                        </div>
+                        <div class="row mb-2 p-2 justify-content-around" id="search_result">
+                            <?php
 
+                            $query = "SELECT * FROM `product` WHERE `user_email` = '" . $_SESSION["user"]["email"] . "'";
+                            $response = Database::select($query);
+                            $rows = $response->num_rows;
+
+                            $results_per_page = 6;
+                            $number_of_pages = ceil($rows / $results_per_page);
+                            $offset = ($page_number - 1) * $results_per_page;
+
+                            $query = "SELECT * FROM `product` WHERE `user_email` = '" . $_SESSION["user"]["email"] . "' LIMIT $results_per_page OFFSET $offset";
+                            $response = Database::select($query);
+                            $rows = $response->num_rows;
+
+
+
+                            for ($i = 0; $i < $rows; $i++) {
+                                $row = $response->fetch_assoc();
+                            ?>
+                                <!-- Card -->
+                                <div class="col-md-5 mx-0 mb-2 mt-2 py-1">
+                                    <div class="row px-2 ">
+                                        <div class="col-4 p-0 me-2">
+                                            <img src="
+                                        <?php
+                                        $img_query = "SELECT * FROM `images` WHERE `product_id` = '" . $row["id"] . "'";
+                                        $img_response = Database::select($img_query);
+                                        $img = $img_response->fetch_assoc();
+                                        echo $img["code"];
+                                        ?>
+                                        " alt="" class="img-thumbnail" style="height: 140px;">
+                                        </div>
+                                        <div class="col text-center me-2 mt-1">
+                                            <span><?php echo $row["title"]; ?></span><br>
+                                            <span>Rs. <?php echo $row["price"] ?>.00</span><br>
+                                            <span><?php echo $row["price"] ?> Items Left</span><br>
+                                            <div class="col-10 align-self-center">
+                                                <div class="form-check form-switch justify-content-center">
+                                                    <input id="active" class="form-check-input" onclick="changeStatus(<?php echo $row["id"]; ?>)" type="checkbox" role="switch" id="flexSwitchCheckChecked" <?php
+                                                                                                                                                                                                            if ($row["status_id"] == "1") {
+                                                                                                                                                                                                                echo "Checked";
+                                                                                                                                                                                                            }
+                                                                                                                                                                                                            ?> <label class="form-check-label w-50 text-center" for="flexSwitchCheckChecked">
+                                                    <?php
+                                                    if ($row["status_id"] == "1") {
+                                                        echo "Active";
+                                                    } else {
+                                                        echo "Inactive";
+                                                    }
+                                                    ?>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="row p-0">
+                                                <div class="col p-0 me-1"><button class="btn btn-success w-100" onclick="sendId(<?php echo $row['id']; ?>);">Update</button></div>
+                                                <div class="col p-0"><button class="btn btn-danger w-100">Delete</button>
+                                                </div>
+                                            </div>
+
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
 
+                            <?php
+                            }
+                            ?>
                         </div>
 
                     </div>
                 </div>
             </div>
-
+        </div>
+        <!-- Pagination -->
+        <div class="row mt-3">
+            <div class="col d-flex">
+                <nav aria-label="Page navigation example" class="mx-auto">
+                    <ul class="pagination m-0">
+                        <li class="page-item">
+                            <a class="page-link" href="myProducts.php?page=1" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                        <?php
+                        for ($i = 1; $i <= $number_of_pages; $i++) {
+                        ?>
+                            <li class="page-item"><a class="page-link <?php
+                                                                        if ($i == $page_number) {
+                                                                            echo "bg-gray";
+                                                                        }
+                                                                        ?>" href="myProducts.php?page=<?php echo $i; ?>"><?php echo $i; ?></a></li>
+                        <?php
+                        }
+                        ?>
+                        <li class="page-item">
+                            <a class="page-link" href="myProducts.php?page=<?php echo $number_of_pages; ?>" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
         </div>
 
         <?php require_once("./footer.php"); ?>

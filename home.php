@@ -79,10 +79,10 @@
             <div class="col-md-2">
                 <div class="row">
                     <div class="col d-none d-md-block">
-                        <a href="#" class="btn-link">Advanced</a>
+                        <a href="advanceSearch.php" class="btn-link">Advanced</a>
                     </div>
                     <div class="col text-center d-md-none">
-                        <a href="#" class="btn-link">Advanced</a>
+                        <a href="advanceSearch.php" class="btn-link">Advanced</a>
                     </div>
                 </div>
             </div>
@@ -186,7 +186,7 @@
                                                     echo "./" . $src["code"];
                                                     ?>" class="card-img-top img-thumbnail" alt="..." style="height:170px">
                                         <div class="card-body">
-                                            <h5 class="card-title"><?php echo $product["title"]; ?> <span class="bg-info badge">New</span></h5>
+                                            <h5 class="card-title"><a class="product_title" href="singleProductView.php?id=<?php echo $product["id"]; ?>"><?php echo $product["title"]; ?></a> <span class="bg-info badge">New</span></h5>
                                             <span class="card-text text-primary">Rs. <?php echo $product["price"]; ?>.00</span>
                                             <br>
 
@@ -199,8 +199,8 @@
                                             ?>
                                             <br>
                                             <span class="card-text text-success fw-bold"><?php echo $product["qty"]; ?> items Available</span><br>
-                                            <button class="btn btn-success w-100">Buy Now</button>
-                                            <button class="btn btn-danger w-100 mt-2">Add to Cart</button>
+                                            <a href='<?php echo "singleProductView.php?id=" . $product_data["id"]; ?>' class="col-12 btn btn-success">Buy Now</a>
+                                            <button class="col-12 btn btn-danger mt-2" onclick="addToCart(<?php echo $product_data['id']; ?>);">Add to Cart</button>
                                             <button class="btn btn-outline-light w-100 mt-2">
                                                 <span class="text-danger">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">

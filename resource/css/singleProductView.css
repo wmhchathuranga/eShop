@@ -1,0 +1,11 @@
+* {
+    /* border: 1px solid black; */
+}
+
+.main-img {
+    height: 640px;
+    background-image: url("../img/empty.svg");
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+}

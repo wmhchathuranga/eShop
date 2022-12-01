@@ -2,7 +2,7 @@
 
 class Database{
     
-    private static $connection;
+    public static $connection;
 
     private static function setUpConnection(){
 
