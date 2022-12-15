@@ -110,6 +110,6 @@ function forgotPassword(){
         }
     }
 
-    request.open("POST", "forgotpassword.php",true);
+    request.open("POST", "forgotpassword.php", true);
     request.send(form);
 }

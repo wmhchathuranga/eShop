@@ -14,6 +14,7 @@
 <body>
     <div class="container-fluid">
 
+        <!-- header -->
         <?php include_once("./header.php"); ?>
 
         <!-- search -->
@@ -43,7 +44,6 @@
                                 for ($i = 0; $i < $rows; $i++) {
                                     $row = $response->fetch_assoc();
                                 ?>
-
                                     <option value='<?php echo $row["id"]; ?>'><?php echo $row["name"]; ?></option>";
                                 <?php
                                 }
@@ -101,12 +101,15 @@
         <div class="row d-none d-md-block my-4" id="carousel">
             <div class="col">
                 <div id="carouselExampleIndicators" class="carousel slide col-md-8 col-10 mx-auto" data-bs-ride="true">
+
                     <div class="carousel-indicators">
                         <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
                         <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
                         <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
                     </div>
+
                     <div class="carousel-inner">
+
                         <div class="carousel-item active">
                             <img src="./resource/img/slider images/posterimg.jpg" class="d-block w-100 img-fluid" alt="...">
                             <div class="carousel-caption d-none d-md-block poster-caption">
@@ -114,9 +117,11 @@
                                 <p class="poster-text">The world's Best Online Store By One Click</p>
                             </div>
                         </div>
+
                         <div class="carousel-item">
                             <img src="./resource/img/slider images/posterimg2.jpg" class="img-fluid d-block w-100" alt="...">
                         </div>
+
                         <div class="carousel-item">
                             <img src="./resource/img/slider images/posterimg3.jpg" class="img-fluid d-block w-100" alt="...">
                             <div class="carousel-caption d-none d-md-block poster-caption2">
@@ -124,11 +129,14 @@
                                 <p class="poster-text">Experience the Lowest Delivery Costs With Us.</p>
                             </div>
                         </div>
+                        
                     </div>
+
                     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                         <span class="visually-hidden">Previous</span>
                     </button>
+
                     <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
                         <span class="carousel-control-next-icon" aria-hidden="true"></span>
                         <span class="visually-hidden">Next</span>
@@ -137,6 +145,7 @@
             </div>
         </div>
 
+        <!-- items -->
         <div class="row" id="items">
             <?php
             $query = "SELECT * FROM `category`";
@@ -222,6 +231,8 @@
             }
             ?>
         </div>
+
+        <!-- footer -->
         <?php include_once("./footer.php"); ?>
     </div>
     <script src="./resource/js/home.js"></script>

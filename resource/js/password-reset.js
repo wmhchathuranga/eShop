@@ -40,6 +40,6 @@ function resetPassword() {
         }
     }
 
-    request.open("POST","passwordresetProcess.php",true);
+    request.open("POST","passwordresetProcess.php", true);
     request.send(form);
 }
