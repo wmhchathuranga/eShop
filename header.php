@@ -8,9 +8,8 @@
                 <span><a href="home.php"> HOME</a></span> | 
                 <span class=""><b>Welcome </b>
                     <?php
-                    // session_destroy();
                     if (isset($_SESSION["user"])) {
-                        echo $_SESSION["user"]["fname"];
+                        echo $_SESSION["user"]["lname"];
                     } ?>
                     | </span>
                 
@@ -22,7 +21,6 @@
                     }
                     ?>
                 
-
                 <span class="fw-bold d-none d-md-inline"> | Help and Contact</span>
             </div>
             <div class="col-12 col-md-4 offset-md-3">
