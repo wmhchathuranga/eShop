@@ -9,7 +9,7 @@
                 <span class=""><b>Welcome </b>
                     <?php
                     if (isset($_SESSION["user"])) {
-                        echo $_SESSION["user"]["lname"];
+                        echo $_SESSION["user"]["fname"];
                     } ?>
                     | </span>
                 

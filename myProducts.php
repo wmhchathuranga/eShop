@@ -144,12 +144,13 @@
                             $rows = $response->num_rows;
 
                             $results_per_page = 6;
-                            $number_of_pages = ceil($rows / $results_per_page);
                             $offset = ($page_number - 1) * $results_per_page;
-
+                            
                             $query = "SELECT * FROM `product` WHERE `user_email` = '" . $_SESSION["user"]["email"] . "' LIMIT $results_per_page OFFSET $offset";
                             $response = Database::select($query);
+                            
                             $rows = $response->num_rows;
+                            $number_of_pages = ceil($rows / $results_per_page);
 
 
 

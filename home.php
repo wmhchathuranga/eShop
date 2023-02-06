@@ -208,8 +208,8 @@
                                             ?>
                                             <br>
                                             <span class="card-text text-success fw-bold"><?php echo $product["qty"]; ?> items Available</span><br>
-                                            <a href='<?php echo "singleProductView.php?id=" . $product_data["id"]; ?>' class="col-12 btn btn-success">Buy Now</a>
-                                            <button class="col-12 btn btn-danger mt-2" onclick="addToCart(<?php echo $product_data['id']; ?>);">Add to Cart</button>
+                                            <a href='<?php echo "singleProductView.php?id=" . $product["id"]; ?>' class="col-12 btn btn-success">Buy Now</a>
+                                            <button class="col-12 btn btn-danger mt-2" onclick="addToCart(<?php echo $product['id']; ?>);">Add to Cart</button>
                                             <button class="btn btn-outline-light w-100 mt-2">
                                                 <span class="text-danger">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">

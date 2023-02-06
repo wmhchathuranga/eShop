@@ -40,8 +40,8 @@ else{
         $mail->Password = 'pyoncsvosvmjchfy';
         $mail->SMTPSecure = 'ssl';
         $mail->Port = 465;
-        $mail->setFrom('harshana.all@gmail.com', 'Eshop Account Team');
-        $mail->addReplyTo('harshana.all@gmail.com', 'Eshop Account Team');
+        $mail->setFrom('harshana.all@timewall.io', 'Eshop Account Team');
+        $mail->addReplyTo('harshana.all@timewall.io', 'Eshop Account Team');
         $mail->addAddress($email);
         $mail->isHTML(true);
         $mail->Subject = 'Password Reset Verification Code';
@@ -56,7 +56,7 @@ else{
         }
     }
     else{
-        echo "Invalid Email Address";
+        echo "Invalid Email Address 1";
     }
 }
 

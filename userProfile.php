@@ -48,6 +48,8 @@
                     <div class="row">
                         <div class="col-12 bg-body rounded mt-4 mb-4">
                             <div class="row g-2">
+
+                                <!-- Profile image -->
                                 <div class="col-md-3 border-end">
                                     <div class="d-flex flex-column align-items-center text-center p-3 py-5">
 
@@ -78,6 +80,7 @@
                                     </div>
                                 </div>
 
+                                <!-- Update information -->
                                 <div class="col-md-5 border-end">
                                     <div class="p-3 py-5">
                                         <div class="d-flex justify-content-between align-items-center mb-3">
@@ -273,9 +276,11 @@
                                         </div>
                                     </div>
                                 </div>
+
+                                <!-- User Ratings -->
                                 <div class="col-md-4 text-center d-md-block d-none">
                                     <div class="row">
-                                        <span class="mt-5 fw-bold text-black-50">Display ads</span>
+                                        <span class="mt-5 fw-bold text-black-50"></span>
                                     </div>
                                 </div>
                             </div>
